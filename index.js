@@ -17,11 +17,11 @@ const questions = () => {
     message: 'Please provide a description of your project',
     name: 'Description'
 },
-{
-    type: 'input',
-    message: 'Table of Contents',
-    name: 'Table of Contents'
-},
+// {
+//     type: 'input',
+//     message: 'Table of Contents',
+//     name: 'Table of Contents'
+// },
 {
     type: 'input',
     message: 'Please provide details on the steps to install your project',
@@ -66,10 +66,24 @@ const questions = () => {
 }
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, function(err){
+        // console.log(fileName)
+        // console.log(data)
+        if (err) throw new Error(err);
+       
+        console.log ("Creation of the README is a success!")
+        
+    })
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(questions)
+    .then(function(data){
+        writeToFile ("README.md", generateMarkdown(data));
+    })
+}
 
 // Function call to initialize app
 init();
