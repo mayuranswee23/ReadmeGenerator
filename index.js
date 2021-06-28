@@ -33,9 +33,10 @@ const questions = () => {
     name: 'Usage'
 },
 {
-    type: 'input',
+    type: 'list',
     message: 'What liscence is used?',
-    name: 'Lisence'
+    name: 'License', 
+    choices: ['MIT', 'GPL', 'CC-0']
 },
 {
     type: 'input',
@@ -79,7 +80,8 @@ function writeToFile(fileName, data) {
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer.prompt(questions)
+    // inquirer.prompt(questions)
+    questions()
     .then(function(data){
         writeToFile ("README.md", generateMarkdown(data));
     })
